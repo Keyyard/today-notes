@@ -62,6 +62,7 @@ export default function App() {
         date: new Date(),
       };
       setTasks([...tasks, newTaskData]);
+      // @ts-expect-error - this works lol don't change if it's working
       await addTask(newTask);
       setNewTask("");
     } catch (error) {

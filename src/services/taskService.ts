@@ -1,4 +1,4 @@
-import { Task } from "../app/components/task";
+import { Task } from "@/app/components/task";
 import { getSession } from "next-auth/react";
 
 export async function getTasks() {

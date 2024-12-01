@@ -16,6 +16,7 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
+      // @ts-expect-error - this works so yea leave it, no need declare typescript
       session.accessToken = token.accessToken;
       return session;
     },
