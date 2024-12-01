@@ -75,7 +75,7 @@ transition-all duration-300;
 }
 
 .download-ios {
-  @apply fixed top-0 font-light py-2 px-4 text-sm opacity-30;
+  @apply fixed bottom-4 left-0 font-light py-2 px-4 text-sm opacity-30;
 }
 
 .download-ios:hover {
