@@ -44,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       try {
         const tasks = await prisma.task.findMany({
           where: { userId: user.id },
-          orderBy: { date: 'desc' },
+          orderBy: { date: 'asc' },
         });
         return res.status(200).json({ tasks });
       } catch (error) {
