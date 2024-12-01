@@ -7,8 +7,14 @@ export default function ThemeSwitcher() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
+    const metaAppleStatusBarStyle = document.querySelector("meta[name=apple-mobile-web-app-status-bar-style]");
+    
     if (metaThemeColor) {
       metaThemeColor.setAttribute("content", theme === "light" ? "#ffffff" : "#000000");
+    }
+    
+    if (metaAppleStatusBarStyle) {
+      metaAppleStatusBarStyle.setAttribute("content", theme === "light" ? "default" : "black-translucent");
     }
   }, [theme]);
 
