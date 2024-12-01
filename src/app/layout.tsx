@@ -38,7 +38,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="Today Notes" />
         {/* Light theme status bar */}
-        <meta name="theme-color" content="#ffffff" /> {/* Default light theme */}
+        <meta name="theme-color" content="#ffffff"/>
         {/* Manifest */}
         <link rel="manifest" href="/manifest.json" />
 

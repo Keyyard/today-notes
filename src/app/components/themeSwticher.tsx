@@ -1,12 +1,15 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { StatusBar } from 'expo-status-bar';
 
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    const metaThemeColor = document.querySelector("meta[name=theme-color]");
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute("content", theme === "light" ? "#ffffff" : "#000000");
+    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -18,7 +21,6 @@ export default function ThemeSwitcher() {
 
   return (
     <div className="p-4">
-      <StatusBar style={theme === "light" ? "dark" : "light"} />
       <Icon className={`text-${theme === "light" ? "black" : "white"} cursor-pointer`} size={24} onClick={toggleTheme} />
     </div>
   );
