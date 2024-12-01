@@ -138,6 +138,7 @@ export default function App() {
         <h1 className="header">Today</h1>
         <h2 className="timestamp">{time}</h2>
       </div>
+      <div className="justify-center flex">
       <div className="download-ios">
         <a
           href="https://today-notes.keyyard.xyz/today-notes.mobileconfig"
@@ -146,6 +147,7 @@ export default function App() {
         >
           Download for iOS
         </a>
+      </div>
       </div>
       {!session ? (
         <div>

@@ -75,5 +75,9 @@ transition-all duration-300;
 }
 
 .download-ios {
-  @apply fixed bottom-4 left-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg text-sm;
+  @apply fixed top-0 font-light py-2 px-4 text-sm opacity-30;
+}
+
+.download-ios:hover {
+  @apply opacity-100 transition-all duration-300;
 }
