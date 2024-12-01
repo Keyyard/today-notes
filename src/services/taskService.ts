@@ -3,7 +3,7 @@ import { getSession } from "next-auth/react";
 
 export async function getTasks() {
   const session = await getSession();
-  if (!session) throw new Error('Not authenticated');
+  if (!session || !session.accessToken) throw new Error('Not authenticated');
 
   const res = await fetch('/api/tasks', {
     headers: {
