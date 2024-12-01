@@ -13,14 +13,18 @@ body {
 :root {
   --background: #ffffff;
   --foreground: #000000;
+  --status-bar-color: #ffffff;
 }
 
 [data-theme="dark"] {
   --background: #000000;
   --foreground: #ffffff;
+  --status-bar-color: #000000;
+
 }
 
 [data-theme="light"] {
+  --status-bar-color: #ffffff;
   --background: #ffffff;
   --foreground: #000000;
 }
