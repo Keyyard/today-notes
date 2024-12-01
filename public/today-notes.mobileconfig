@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>PayloadContent</key>
+    <array>
+      <dict>
+        <key>FullScreen</key>
+        <true/>
+        <key>IconURL</key>
+        <string>https://today-notes.keyyard.xyz/favicon.ico</string>
+        <key>Label</key>
+        <string>Today Notes</string>
+        <key>PayloadDescription</key>
+        <string>Adds Today Notes as a web app to your home screen.</string>
+        <key>PayloadDisplayName</key>
+        <string>Today Notes Web App</string>
+        <key>PayloadIdentifier</key>
+        <string>com.keyyard.todaynotes</string>
+        <key>PayloadType</key>
+        <string>com.apple.webClip.managed</string>
+        <key>PayloadUUID</key>
+        <string>817d12de-00bb-4d1d-bb92-edcc3d17cfaf</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>Precomposed</key>
+        <true/>
+        <key>URL</key>
+        <string>https://today-notes.keyyard.xyz/</string>
+      </dict>
+    </array>
+    <key>PayloadDisplayName</key>
+    <string>Today Notes</string>
+    <key>PayloadIdentifier</key>
+    <string>com.keyyard.mobileconfig</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>817d12de-00bb-4d1d-bb92-edcc3d17cfaf</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+  </dict>
+</plist>
