@@ -2,6 +2,12 @@
 
 Today Notes is a lightweight, daily task management application built using **Next.js**, **React**, **TailwindCSS**, **Prisma**, and **Postgresql - Supabase**. It allows users to create tasks that expire in 24 hours, providing a clean and minimalist interface with support for dark and light themes.
 
+## **Psychology Behind "Today" Notes**
+
+The name "Today Notes" reflects the principle of focusing on the tasks that matter most today. Human psychology often leads to procrastination, with the tendency to push tasks into the future. Research suggests that tasks seem less intimidating when we break them down into smaller, more immediate goals.
+
+By limiting tasks to today, the app encourages users to focus on what they can achieve now. The concept of "planning for today before tomorrow" is grounded in behavioral psychology, where creating urgency helps combat procrastination, enhances focus, and boosts productivity. With automatic task expiration, there's no option to "put it off until tomorrow"—the goal is to complete today’s tasks, making each day more productive and fulfilling.
+
 ## **Features**
 - **Task Management**:
   - Add new tasks quickly with a floating action button (FAB).
