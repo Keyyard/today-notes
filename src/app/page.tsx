@@ -44,8 +44,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const cachedTasks = localStorage.getItem("tasks");
+    const cachedTasks = window.localStorage.getItem("tasks");
     if (cachedTasks) {
       setTasks(JSON.parse(cachedTasks));
     } else {
@@ -53,11 +52,14 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    window.localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   const fetchTasks = async () => {
     try {
       const data = await getTasks();
       setTasks(data.tasks);
-      localStorage.setItem("tasks", JSON.stringify(data.tasks)); // Cache tasks
     } catch {
       console.log("Error fetching tasks");
     }
@@ -205,20 +207,6 @@ export default function App() {
                   {task.task}
                 </div>
               ))}
-            {tasks
-              .filter((task) => task.status === TaskStatus.Done)
-              .map((task, index) => (
-                <div
-                  key={index}
-                  className="done-task task"
-                  onClick={() => handleReAddTask(task)}
-                >
-                  {task.task}
-                </div>
-              ))}
-            <button className="add-task-button" onClick={toggleInput}>
-              +
-            </button>
           </div>
         </div>
       )}
