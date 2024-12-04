@@ -6,7 +6,7 @@ import { Task, TaskStatus } from "@/app/components/task";
 import { toast } from "react-hot-toast";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const FooterText = lazy(() => import("@/app/components/footerText"));
+const FooterText = lazy(() => import("@/app/components/FooterText"));
 const ThemeSwitcher = lazy(() => import("@/app/components/themeSwticher"));
 const Toaster = lazy(() =>
   import("react-hot-toast").then((mod) => ({ default: mod.Toaster }))
