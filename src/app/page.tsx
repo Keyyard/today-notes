@@ -63,10 +63,6 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
   const handleAddTask = async () => {
     if (newTask.trim() === "") return;
     const newTaskData = {
