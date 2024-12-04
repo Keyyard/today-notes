@@ -44,6 +44,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const cachedTasks = localStorage.getItem("tasks");
     if (cachedTasks) {
       setTasks(JSON.parse(cachedTasks));

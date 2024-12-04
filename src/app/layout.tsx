@@ -47,26 +47,10 @@ export const metadata: Metadata = {
     creator: "@keyyard",
     images: ["https://today-notes.keyyard.xyz/icons/180.png"],
   },
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
-  themeColor: "#ffffff", // Light theme
-  appleWebApp: {
-    title: "Today Notes",
-    statusBarStyle: "default",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: [
-      { url: "/icons/180.png", sizes: "180x180" },
-      { url: "/icons/152.png", sizes: "152x152" },
-      { url: "/icons/120.png", sizes: "120x120" },
-      { url: "/icons/76.png", sizes: "76x76" },
-    ],
-  },
 };
 
-
-export const viewport =
-  "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
+export const viewport = "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
+export const themeColor = "#ffffff"; // Light theme
 
 export default function RootLayout({
   children,
