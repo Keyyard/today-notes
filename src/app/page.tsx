@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import React, { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { addTask, getTasks, doneTask, reAddTask } from "@/services/taskService";
-import ThemeSwitcher from "@/app/components/themeSwticher";
 import { Task, TaskStatus } from "@/app/components/task";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { signIn, signOut, useSession } from "next-auth/react";
+
+const ThemeSwitcher = lazy(() => import("@/app/components/themeSwticher"));
+const Toaster = lazy(() =>
+  import("react-hot-toast").then((mod) => ({ default: mod.Toaster }))
+);
 
 export default function App() {
   const { data: session } = useSession();
@@ -39,11 +43,21 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const cachedTasks = localStorage.getItem("tasks");
+    if (cachedTasks) {
+      setTasks(JSON.parse(cachedTasks));
+    } else {
+      fetchTasks();
+    }
+  }, []);
+
   const fetchTasks = async () => {
     try {
       const data = await getTasks();
       setTasks(data.tasks);
-    } catch (error) {
+      localStorage.setItem("tasks", JSON.stringify(data.tasks)); // Cache tasks
+    } catch {
       console.log("Error fetching tasks");
     }
   };
@@ -54,36 +68,35 @@ export default function App() {
 
   const handleAddTask = async () => {
     if (newTask.trim() === "") return;
+    const newTaskData = {
+      id: Date.now(),
+      task: newTask,
+      status: TaskStatus.Active,
+      date: new Date(),
+    };
+    setTasks((prev) => [newTaskData, ...prev]); // Update UI immediately
     try {
-      const newTaskData = {
-        id: Date.now(),
-        task: newTask,
-        status: TaskStatus.Active,
-        date: new Date(),
-      };
-      setTasks([...tasks, newTaskData]);
       // @ts-expect-error - this works lol don't change if it's working
       await addTask(newTask);
       setNewTask("");
     } catch (error) {
+      setTasks((prev) => prev.filter(task => task.id !== newTaskData.id)); // rollback UI changes
       toast.error("Error adding task");
       console.log("Error adding task");
     }
   };
 
   const handleDoneTask = async (id: number) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, status: TaskStatus.Done } : task))
+    );
     try {
       await doneTask(id);
-      setTasks(
-        tasks.map((task) =>
-          task.id === id ? { ...task, status: TaskStatus.Done } : task
-        )
-      );
-      fetchTasks();
     } catch (error) {
-      console.log("Error done task");
+      toast.error("Error marking task as done");
     }
   };
+  
 
   const handleReAddTask = async (task: Task) => {
     try {
@@ -115,6 +128,12 @@ export default function App() {
     }
   };
 
+  const handleInputFocus = () => {
+    if (inputRef.current) {
+      inputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
   useEffect(() => {
     if (showInput && inputRef.current) {
       inputRef.current.focus();
@@ -130,10 +149,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <ThemeSwitcher />
-      <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ThemeSwitcher />
         <Toaster position="top-right" reverseOrder={true} />
-      </div>
+      </Suspense>
       <div className="justify-center">
         <h1 className="header">Today</h1>
         <h2 className="timestamp">{time}</h2>
@@ -143,9 +162,9 @@ export default function App() {
           <button onClick={() => signIn("google")} className="sign-in">
             Sign in with Google
           </button>
-            <div className="flex justify-center items-center">
-              Please sign in to view tasks
-            </div>
+          <div className="flex justify-center items-center">
+            Please sign in to view tasks
+          </div>
         </div>
       ) : (
         <div>
@@ -158,6 +177,7 @@ export default function App() {
                 ref={inputRef}
                 type="text"
                 value={newTask}
+                onFocus={handleInputFocus}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 onKeyPress={handleKeyPress}
