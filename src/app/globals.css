@@ -45,7 +45,9 @@ transition-all duration-300;
   @apply fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-12 h-12 flex items-center justify-center;
 }
 .task-input {
-  @apply text-xl border-none focus:outline-none bg-background text-foreground;
+  @apply text-xl border-none focus:outline-none bg-background text-foreground w-full overflow-hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .task {
   @apply py-1 my-1 cursor-pointer text-xl;

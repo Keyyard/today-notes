@@ -75,12 +75,12 @@ export default function App() {
       date: new Date(),
     };
     setTasks((prev) => [newTaskData, ...prev]); // Update UI immediately
+    setNewTask("");
     try {
       // @ts-expect-error - this works lol don't change if it's working
       await addTask(newTask);
-      setNewTask("");
     } catch (error) {
-      setTasks((prev) => prev.filter(task => task.id !== newTaskData.id)); // rollback UI changes
+      setTasks((prev) => prev.filter((task) => task.id !== newTaskData.id)); // rollback UI changes
       toast.error("Error adding task");
       console.log("Error adding task");
     }
@@ -88,7 +88,9 @@ export default function App() {
 
   const handleDoneTask = async (id: number) => {
     setTasks((prev) =>
-      prev.map((task) => (task.id === id ? { ...task, status: TaskStatus.Done } : task))
+      prev.map((task) =>
+        task.id === id ? { ...task, status: TaskStatus.Done } : task
+      )
     );
     try {
       await doneTask(id);
@@ -96,20 +98,19 @@ export default function App() {
       toast.error("Error marking task as done");
     }
   };
-  
 
   const handleReAddTask = async (task: Task) => {
+    const updatedTask = { ...task, date: new Date(), status: TaskStatus.Active };
+    setTasks((prev) =>
+      prev.map((t) => (t.id === task.id ? updatedTask : t))
+    ); // Update UI immediately
     try {
       await reAddTask(task);
-      setTasks(
-        tasks.map((t) =>
-          t.id === task.id
-            ? { ...t, date: new Date(), status: TaskStatus.Active }
-            : t
-        )
-      );
-      fetchTasks();
     } catch (error) {
+      setTasks((prev) =>
+        prev.map((t) => (t.id === task.id ? task : t))
+      ); // Rollback UI changes
+      toast.error("Error re-adding task");
       console.error("Error re-adding task", error);
     }
   };
