@@ -38,13 +38,15 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="Today Notes" />
         {/* Light theme status bar */}
-        <meta name="theme-color" content="#ffffff"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
         {/* Manifest */}
         <link rel="manifest" href="/manifest.json" />
 
-        {/* Favicon used as app icon */}
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        {/* Icons */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/180.png" />
         <link rel="apple-touch-icon" sizes="152x152" href="/icons/152.png" />
