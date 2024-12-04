@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   themeColor: "#ffffff", // Light theme
   appleWebApp: {
     title: "Today Notes",
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "default",
   },
   icons: {
     icon: "/favicon.ico",
