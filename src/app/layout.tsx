@@ -47,10 +47,12 @@ export const metadata: Metadata = {
     creator: "@keyyard",
     images: ["https://today-notes.keyyard.xyz/icons/180.png"],
   },
-  themeColor: "#ffffff",
 };
 
-export const viewport = "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
+export const viewport = {
+  content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+  themeColor: "#ffffff",
+};
 
 export default function RootLayout({
   children,
