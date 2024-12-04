@@ -16,13 +16,54 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.json",
   title: "Today Notes",
   description:
-    "Today Notes is a lightweight, daily task management web application built with Next.js, React, TailwindCSS, Prisma, and SQLite. It features task expiration, light/dark modes, real-time notifications, and more for a seamless user experience.",
+    "Today Notes is a lightweight, daily task management web app with task expiration, light/dark modes, and real-time notifications.",
   keywords:
     "task management, daily tasks, task app, nextjs, react, tailwindcss, prisma, sqlite, task reminders, light/dark mode, optimistic UI, toast notifications, frontend development, full-stack development, web application, task tracker, productivity app, react hooks, web app design, real-time notifications, next.js project",
   authors: [{ name: "Keyyard" }],
+  openGraph: {
+    title: "Today Notes",
+    description:
+      "Today Notes is a lightweight, daily task management web app with task expiration, light/dark modes, and real-time notifications.",
+    url: "https://today-notes.keyyard.xyz/",
+    type: "website",
+    siteName: "Today Notes",
+    images: [
+      {
+        url: "https://today-notes.keyyard.xyz/icons/180.png",
+        width: 180,
+        height: 180,
+        alt: "Today Notes Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Today Notes",
+    description:
+      "Lightweight, daily task management web app with task expiration, light/dark modes, and real-time notifications.",
+    creator: "@keyyard",
+    images: ["https://today-notes.keyyard.xyz/icons/180.png"],
+  },
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+  themeColor: "#ffffff", // Light theme
+  appleWebApp: {
+    title: "Today Notes",
+    statusBarStyle: "black-translucent",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: [
+      { url: "/icons/180.png", sizes: "180x180" },
+      { url: "/icons/152.png", sizes: "152x152" },
+      { url: "/icons/120.png", sizes: "120x120" },
+      { url: "/icons/76.png", sizes: "76x76" },
+    ],
+  },
 };
+
 
 export const viewport =
   "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
@@ -59,7 +100,7 @@ export default function RootLayout({
           name="twitter:image"
           content="https://today-notes.keyyard.xyz/icons/180.png"
         />
-        <meta name="twitter:creator" content="@YourTwitterHandle" />
+        <meta name="twitter:creator" content="@keyyard" />
 
         {/* Web App Meta Tags */}
         <meta name="viewport" content={viewport} />
