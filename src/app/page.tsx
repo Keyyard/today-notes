@@ -75,8 +75,7 @@ export default function App() {
     setTasks((prev) => [newTaskData, ...prev]); // Update UI immediately
     setNewTask("");
     try {
-      // @ts-expect-error - this works lol don't change if it's working
-      await addTask(newTask);
+      await addTask(newTaskData);
     } catch (error) {
       setTasks((prev) => prev.filter((task) => task.id !== newTaskData.id)); // rollback UI changes
       toast.error("Error adding task");
