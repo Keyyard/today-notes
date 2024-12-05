@@ -66,18 +66,19 @@ export default function App() {
 
   const handleAddTask = async () => {
     if (newTask.trim() === "") return;
-    const newTaskData = {
+    const newTaskDataClient = {
       id: Date.now(),
       task: newTask,
       status: TaskStatus.Active,
       date: new Date(),
     };
-    setTasks((prev) => [newTaskData, ...prev]); // Update UI immediately
+    setTasks((prev) => [newTaskDataClient, ...prev]); // Update UI immediately
+    const newTaskData = newTask;
     setNewTask("");
     try {
       await addTask(newTaskData);
     } catch (error) {
-      setTasks((prev) => prev.filter((task) => task.id !== newTaskData.id)); // rollback UI changes
+      setTasks((prev) => prev.filter((task) => task.id !== newTaskDataClient.id)); // rollback UI changes
       toast.error("Error adding task");
       console.log("Error adding task");
     }

@@ -15,7 +15,7 @@ export async function getTasks() {
   return res.json();
 }
 
-export async function addTask(task: Task) {
+export async function addTask(task: string) {
   const session = await getSession();
   if (!session) throw new Error('Not authenticated');
 
