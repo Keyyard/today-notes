@@ -145,6 +145,8 @@ export default function App() {
   };
 
   return (
+    <>
+    <main>
     <div className="min-h-screen bg-background text-foreground">
       <Suspense fallback={<div>Loading...</div>}>
         <ThemeSwitcher />
@@ -221,7 +223,9 @@ export default function App() {
           </div>
         </div>
       )}
-      <FooterText />
     </div>
+    </main>
+          <FooterText />
+</>
   );
 }
