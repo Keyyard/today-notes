@@ -49,9 +49,8 @@ export default function App() {
     const cachedTasks = localStorage.getItem("tasks");
     if (cachedTasks) {
       setTasks(JSON.parse(cachedTasks));
-    } else {
-      fetchTasks();
     }
+      fetchTasks();
   }, []);
 
   const fetchTasks = async () => {
@@ -66,19 +65,18 @@ export default function App() {
 
   const handleAddTask = async () => {
     if (newTask.trim() === "") return;
-    const newTaskDataClient = {
+    const newTaskData = {
       id: Date.now(),
       task: newTask,
       status: TaskStatus.Active,
       date: new Date(),
     };
-    setTasks((prev) => [newTaskDataClient, ...prev]); // Update UI immediately
-    const newTaskData = newTask;
-    setNewTask("");
+    setTasks((prev) => [newTaskData, ...prev]); // Update UI immediately
     try {
-      await addTask(newTaskData);
+      await addTask(newTask);
+      setNewTask("");
     } catch (error) {
-      setTasks((prev) => prev.filter((task) => task.id !== newTaskDataClient.id)); // rollback UI changes
+      setTasks((prev) => prev.filter((task) => task.id !== newTaskData.id)); // rollback UI changes
       toast.error("Error adding task");
       console.log("Error adding task");
     }
