@@ -50,7 +50,7 @@ export default function App() {
     if (cachedTasks) {
       setTasks(JSON.parse(cachedTasks));
     }
-      fetchTasks();
+    fetchTasks();
   }, []);
 
   const fetchTasks = async () => {
@@ -96,16 +96,16 @@ export default function App() {
   };
 
   const handleReAddTask = async (task: Task) => {
-    const updatedTask = { ...task, date: new Date(), status: TaskStatus.Active };
-    setTasks((prev) =>
-      prev.map((t) => (t.id === task.id ? updatedTask : t))
-    ); // Update UI immediately
+    const updatedTask = {
+      ...task,
+      date: new Date(),
+      status: TaskStatus.Active,
+    };
+    setTasks((prev) => prev.map((t) => (t.id === task.id ? updatedTask : t))); // Update UI immediately
     try {
       await reAddTask(task);
     } catch (error) {
-      setTasks((prev) =>
-        prev.map((t) => (t.id === task.id ? task : t))
-      ); // Rollback UI changes
+      setTasks((prev) => prev.map((t) => (t.id === task.id ? task : t))); // Rollback UI changes
       toast.error("Error re-adding task");
       console.error("Error re-adding task", error);
     }
@@ -146,86 +146,84 @@ export default function App() {
 
   return (
     <>
-    <main>
-    <div className="min-h-screen bg-background text-foreground">
-      <Suspense fallback={<div>Loading...</div>}>
-        <ThemeSwitcher />
-        <Toaster position="top-right" reverseOrder={true} />
-      </Suspense>
-      <div className="justify-center">
-        <h1 className="header">Today</h1>
-        <h2 className="timestamp">{time}</h2>
-      </div>
-      {!session ? (
-        <div>
-          <button onClick={() => signIn("google")} className="sign-in">
-            Sign in with Google
-          </button>
-          <div className="flex justify-center items-center">
-            Please sign in to view tasks
-          </div>
+      <div className="min-h-screen bg-background text-foreground">
+        <Suspense fallback={<div>Loading...</div>}>
+          <ThemeSwitcher />
+          <Toaster position="top-right" reverseOrder={true} />
+        </Suspense>
+        <div className="justify-center">
+          <h1 className="header">Today</h1>
+          <h2 className="timestamp">{time}</h2>
         </div>
-      ) : (
-        <div>
-          <button onClick={() => signOut()} className="sign-out">
-            Sign out
-          </button>
-          <div className="task-list">
-            {showInput && (
-              <input
-                ref={inputRef}
-                type="text"
-                value={newTask}
-                onFocus={handleInputFocus}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                onKeyPress={handleKeyPress}
-                placeholder="Type a new task.."
-                className="task-input"
-              />
-            )}
-            {tasks
-              .filter((task) => task.status === TaskStatus.Active)
-              .map((task, index) => (
-                <div
-                  key={index}
-                  className="active-task task"
-                  onClick={() => handleDoneTask(task.id)}
-                >
-                  {task.task}
-                </div>
-              ))}
-            {tasks
-              .filter((task) => task.status === TaskStatus.Expired)
-              .map((task, index) => (
-                <div
-                  key={index}
-                  className="expired-task task"
-                  onClick={() => handleDoneTask(task.id)}
-                >
-                  {task.task}
-                </div>
-              ))}
-            {tasks
-              .filter((task) => task.status === TaskStatus.Done)
-              .map((task, index) => (
-                <div
-                  key={index}
-                  className="done-task task"
-                  onClick={() => handleReAddTask(task)}
-                >
-                  {task.task}
-                </div>
-              ))}
-            <button className="add-task-button" onClick={toggleInput}>
-              +
+        {!session ? (
+          <div>
+            <button onClick={() => signIn("google")} className="sign-in">
+              Sign in with Google
             </button>
+            <div className="flex justify-center items-center">
+              Please sign in to view tasks
+            </div>
           </div>
-        </div>
-      )}
-    </div>
-    </main>
-          <FooterText />
-</>
+        ) : (
+          <div>
+            <button onClick={() => signOut()} className="sign-out">
+              Sign out
+            </button>
+            <div className="task-list">
+              {showInput && (
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={newTask}
+                  onFocus={handleInputFocus}
+                  onChange={handleInputChange}
+                  onBlur={handleInputBlur}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Type a new task.."
+                  className="task-input"
+                />
+              )}
+              {tasks
+                .filter((task) => task.status === TaskStatus.Active)
+                .map((task, index) => (
+                  <div
+                    key={index}
+                    className="active-task task"
+                    onClick={() => handleDoneTask(task.id)}
+                  >
+                    {task.task}
+                  </div>
+                ))}
+              {tasks
+                .filter((task) => task.status === TaskStatus.Expired)
+                .map((task, index) => (
+                  <div
+                    key={index}
+                    className="expired-task task"
+                    onClick={() => handleDoneTask(task.id)}
+                  >
+                    {task.task}
+                  </div>
+                ))}
+              {tasks
+                .filter((task) => task.status === TaskStatus.Done)
+                .map((task, index) => (
+                  <div
+                    key={index}
+                    className="done-task task"
+                    onClick={() => handleReAddTask(task)}
+                  >
+                    {task.task}
+                  </div>
+                ))}
+              <button className="add-task-button" onClick={toggleInput}>
+                +
+              </button>
+            </div>
+          </div>
+        )}
+        <FooterText />
+      </div>
+    </>
   );
 }

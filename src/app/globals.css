@@ -89,21 +89,7 @@ transition-all duration-300;
 }
 
 .footer {
-  @apply text-center text-xs opacity-50 w-full py-2;
-  position: absolute;
-  bottom: 6;
-}
-
-html, body {
-  @apply min-h-screen flex flex-col;
-}
-
-body {
-  @apply relative;
-}
-
-main {
-  @apply flex-grow;
+  @apply text-center text-xs opacity-50 w-full py-2 absolute bottom-12 lg:bottom-0;
 }
 
 .github {
