@@ -88,12 +88,8 @@ transition-all duration-300;
   @apply opacity-100 transition-all duration-300;
 }
 
-main {
-  @apply h-screen min-h-screen
-}
-
 .footer {
-  @apply text-center text-xs opacity-50 w-full py-2 bottom-12 lg:bottom-0;
+  @apply text-center text-xs opacity-50 w-full py-2 mt-12 bottom-12 lg:bottom-0 right-2 relative;
 }
 
 .github {
