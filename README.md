@@ -44,38 +44,6 @@ By limiting tasks to today, the app encourages users to focus on what they can a
 - **Re-add Expired Task:** Click on an expired task to re-add it to the active list.
 - **Automatic Expiry and Deletion:** Tasks expire after 24 hours and are deleted after 48 hours.
 
-## **Project Structure**
-```
-today-notes-app/
-├── prisma
-│   ├── migrations
-│   │   ├── 20241201072809_init_supabase
-│   │   ├── 20241201073523_init_supabase
-│   │   └── migration_lock.toml
-│   └── schema.prisma
-├── public
-│   ├── file.svg
-│   ├── globe.svg
-│   ├── next.svg
-│   ├── vercel.svg
-│   └── window.svg
-├── src
-│   ├── app
-│   │   ├── components
-│   │   ├── fonts
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   └── providers.tsx
-│   ├── lib
-│   │   └── prisma.ts
-│   ├── pages
-│   │   └── api
-│   └── services
-│       └── taskService.ts
-├── tailwind.config.ts
-└── tsconfig.json
-```
 ## **License**
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
