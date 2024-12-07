@@ -5,6 +5,7 @@ import { addTask, getTasks, doneTask, reAddTask } from "@/services/taskService";
 import { Task, TaskStatus } from "@/app/components/task";
 import { toast } from "react-hot-toast";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Landing from "@/app/components/Landing";
 
 const FooterText = lazy(() => import("@/app/components/FooterText"));
 const ThemeSwitcher = lazy(() => import("@/app/components/themeSwticher"));
@@ -157,14 +158,7 @@ export default function App() {
           <h2 className="timestamp">{time}</h2>
         </div>
         {!session ? (
-          <div>
-            <button onClick={() => signIn("google")} className="sign-in">
-              Sign in with Google
-            </button>
-            <div className="flex justify-center items-center">
-              Please sign in to view tasks
-            </div>
-          </div>
+          <Landing />
         ) : (
           <div>
             <button onClick={() => signOut()} className="sign-out">

@@ -31,10 +31,10 @@ By limiting tasks to today, the app encourages users to focus on what they can a
 - **Styling**: TailwindCSS
 
 ## **Screenshots**
-![Screenshot 1](medias/1.png)
-![Screenshot 2](medias/2.png)
-![Screenshot 3](medias/3.png)
-![Screenshot 4](medias/4.png)
+![Screenshot 1](public/medias/1.png)
+![Screenshot 2](public/medias/2.png)
+![Screenshot 3](public/medias/3.png)
+![Screenshot 4](public/medias/4.png)
 
 ## **Usage**
 
