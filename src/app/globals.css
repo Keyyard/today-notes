@@ -89,7 +89,7 @@ transition-all duration-300;
 }
 
 .footer {
-  @apply text-center text-xs opacity-50 w-full py-2 mt-12 bottom-12 lg:bottom-0 right-2 relative;
+  @apply text-center text-xs opacity-50 w-full py-2 mt-24 lg:mt-12 bottom-12 lg:bottom-0 right-2 relative;
 }
 
 .github {
