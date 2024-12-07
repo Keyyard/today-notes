@@ -34,9 +34,9 @@ const Landing: React.FC = () => {
         </button>
       </section>
       <section className="landing-section">
-<h2 className="landing-title">Psychology Behind 'Today'</h2>
+<h2 className="landing-title">Psychology Behind &apos;Today&apos;</h2>
 <p className="landing-text">
-  The name 'Today' reflects the principle of focusing on the tasks that matter most today. Human psychology often leads to procrastination, with the tendency to push tasks into the future. Research suggests that tasks seem less intimidating when we break them down into smaller, more immediate goals.
+  The name &apos;Today&apos; reflects the principle of focusing on the tasks that matter most today. Human psychology often leads to procrastination, with the tendency to push tasks into the future. Research suggests that tasks seem less intimidating when we break them down into smaller, more immediate goals.
 </p>
 <p className="landing-text">
   By limiting tasks to today, the app encourages users to focus on what they can achieve now. The concept of 'planning for today before tomorrow' is grounded in behavioral psychology, where creating urgency helps combat procrastination, enhances focus, and boosts productivity. With automatic task expiration, there's no option to 'put it off until tomorrow'—the goal is to complete today’s tasks, making each day more productive and fulfilling.
