@@ -73,9 +73,10 @@ export default function App() {
       date: new Date(),
     };
     setTasks((prev) => [newTaskData, ...prev]); // Update UI immediately
+    const newTaskBackend = newTask;
+    setNewTask("");
     try {
-      await addTask(newTask);
-      setNewTask("");
+      await addTask(newTaskBackend);
     } catch (error) {
       setTasks((prev) => prev.filter((task) => task.id !== newTaskData.id)); // rollback UI changes
       toast.error("Error adding task");
