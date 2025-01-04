@@ -43,12 +43,6 @@ async function handleTaskExpirationAndDeletion(userId: string) {
         data: { status: TaskStatus.Expired },
       });
     }
-
-    if (task.status === TaskStatus.Expired && diffHours >= 48) {
-      await prisma.task.delete({
-        where: { id: task.id },
-      });
-    }
   }
 }
 
