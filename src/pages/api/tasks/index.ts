@@ -19,6 +19,39 @@ interface SuccessResponse {
   task?: Task;
 }
 
+async function handleTaskExpirationAndDeletion(userId: string) {
+  const now = new Date();
+  const tasks = await prisma.task.findMany({
+    where: { userId },
+  });
+
+  for (const task of tasks) {
+    const taskDate = new Date(task.date);
+    const diff = now.getTime() - taskDate.getTime();
+    const diffHours = diff / (1000 * 60 * 60);
+
+    if (task.status === TaskStatus.Active && diffHours >= 24) {
+      await prisma.task.update({
+        where: { id: task.id },
+        data: { status: TaskStatus.Expired },
+      });
+    }
+
+    if (task.status === TaskStatus.Done && diffHours >= 24) {
+      await prisma.task.update({
+        where: { id: task.id },
+        data: { status: TaskStatus.Expired },
+      });
+    }
+
+    if (task.status === TaskStatus.Expired && diffHours >= 48) {
+      await prisma.task.delete({
+        where: { id: task.id },
+      });
+    }
+  }
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ErrorResponse | SuccessResponse | { tasks: Task[] }>) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   // console.log('token:', token);
@@ -42,6 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   switch (req.method) {
     case 'GET':
       try {
+        await handleTaskExpirationAndDeletion(user.id);
         const tasks = await prisma.task.findMany({
           where: { userId: user.id },
           orderBy: { date: 'desc' },
