@@ -9,6 +9,7 @@ export default NextAuth({
     }),
   ],
   callbacks: {
+    // call backs are used to add additional data to the token and session object that is returned by the provider
     async jwt({ token, account }) {
       if (account) {
         token.accessToken = account.access_token;
@@ -21,6 +22,6 @@ export default NextAuth({
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET, // this is used to encrypt the token and session object
 });
 

@@ -48,7 +48,8 @@ export default async function handler(
             id: Number(id),
             userId: user.id,
           },
-          data: { status: TaskStatus.Done },
+          data: { status: TaskStatus.Done, date: new Date()
+           },
         });
         return res.status(200).json({ message: 'Task marked as done', task: updatedTask });
       } catch (error) {
