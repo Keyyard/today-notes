@@ -1,52 +1,124 @@
+
 # Today Notes
 
-Today Notes is a lightweight, daily task management application built using **Next.js**, **React**, **TailwindCSS**, **Prisma**, and **Postgresql - Supabase**. It allows users to create tasks that expire in 24 hours, providing a clean and minimalist interface with support for dark and light themes.
+Today Notes is a modern, minimalist daily task manager built with **Next.js 14 App Router**, **React**, **TailwindCSS**, **Prisma**, and **PostgreSQL (Supabase)**. Tasks expire in 24 hours, encouraging focus and productivity—no more endless backlogs!
 
-## **Psychology Behind "Today" Notes**
 
-The name "Today Notes" reflects the principle of focusing on the tasks that matter most today. Human psychology often leads to procrastination, with the tendency to push tasks into the future. Research suggests that tasks seem less intimidating when we break them down into smaller, more immediate goals.
+<p align="center">
+  <a href="https://nextjs.org/">
+    <img src="https://img.shields.io/badge/Next.js_14-000000?logo=next.js" alt="Next.js 14" />
+  </a>
+  <a href="https://react.dev/">
+    <img src="https://img.shields.io/badge/React-61dafb?logo=react" alt="React" />
+  </a>
+  <a href="https://tailwindcss.com/">
+    <img src="https://img.shields.io/badge/Styling-TailwindCSS-38bdf8?logo=tailwindcss" alt="Styling: TailwindCSS" />
+  </a>
+  <a href="https://www.prisma.io/">
+    <img src="https://img.shields.io/badge/ORM-Prisma-2d3748?logo=prisma" alt="ORM: Prisma" />
+  </a>
+  <a href="https://supabase.com/">
+    <img src="https://img.shields.io/badge/Database-Supabase_PostgreSQL-3ecf8e?logo=supabase" alt="Database: Supabase PostgreSQL" />
+  </a>
+  <a href="https://next-auth.js.org/">
+    <img src="https://img.shields.io/badge/Auth-NextAuth_Google-4285f4?logo=google" alt="Auth: NextAuth (Google)" />
+  </a>
+</p>
 
-By limiting tasks to today, the app encourages users to focus on what they can achieve now. The concept of "planning for today before tomorrow" is grounded in behavioral psychology, where creating urgency helps combat procrastination, enhances focus, and boosts productivity. With automatic task expiration, there's no option to "put it off until tomorrow"—the goal is to complete today’s tasks, making each day more productive and fulfilling.
-
-## **Features**
-- **Task Management**:
-  - Add new tasks quickly with a floating action button (FAB).
-  - Mark tasks as done, re-add expired tasks, or delete them.
-  - Tasks automatically expire after 24 hours.
-  - Tasks automatically delete after 48 hours.
-- **Optimistic UI Updates**:
-  - Tasks update in the UI before server confirmation to enhance user experience.
-- **Theming**:
-  - Supports light and dark modes with a customizable theme switcher.
-- **Notifications**:
-  - Real-time feedback with toast notifications using `react-hot-toast`.
-- **Data Persistence**:
-  - Uses Postgresql - Supabase for data persistence and Prisma ORM.
-
-## **Technologies Used**
-- **Frontend**: Next.js, React, TailwindCSS
-- **Backend**: Next.js RESTful API Routes, Prisma, POSTGRESQL - Supabase
-- **State Management**: React Hooks (useState, useEffect)
-- **Notifications**: `react-hot-toast`
-- **Styling**: TailwindCSS
-
-## **Screenshots**
-![Screenshot 1](public/medias/1.png)
-![Screenshot 2](public/medias/2.png)
-![Screenshot 3](public/medias/3.png)
-![Screenshot 4](public/medias/4.png)
-
-## **Usage**
-
-- **Login via Google:** Click the `Login with Google` button to sign in.
-- **Add Task:** Click the floating `+` button and type in your task.
-- **Mark Task as Done:** Click on a task to mark it as done.
-- **Re-add Expired Task:** Click on an expired task to re-add it to the active list.
-- **Automatic Expiry and Deletion:** Tasks expire after 24 hours and are deleted after 48 hours.
-
-## **License**
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Enjoy managing your daily tasks with Today Notes!**
+## 🧠 Why "Today Notes"?
+
+**Today Notes** is based on the psychology of immediacy: we procrastinate less when tasks are urgent and actionable. By limiting your list to today, you focus on what matters now. Tasks expire after 24 hours, so you can’t put them off—tomorrow is a new slate.
+
+---
+
+## ✨ Features
+
+- **Google Auth**: Secure login with Google via NextAuth.
+- **Task CRUD**: Add, complete, re-add, and auto-expire tasks.
+- **Optimistic UI**: Instant feedback for all actions.
+- **Theme Switcher**: Light/dark mode with persistent preference.
+- **Global State**: Context + custom hooks for task management.
+- **Type Safety**: Centralized types, strict API contracts.
+- **Error Handling**: User-friendly errors and defensive state.
+- **Prisma ORM**: PostgreSQL (Supabase) for robust persistence.
+- **Modern Styling**: TailwindCSS, accessible, responsive.
+- **Developer Experience**: Barrel exports, clean imports, clear docs.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 14 App Router, React, TailwindCSS
+- **Backend**: Next.js API Routes, Prisma, PostgreSQL (Supabase)
+- **Auth**: NextAuth (Google provider)
+- **State**: React Context, custom hooks
+- **Notifications**: react-hot-toast
+- **Testing**: Jest, React Testing Library (see `src/__tests__`)
+
+---
+
+## 🖼️ Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>Home</b></td>
+      <td align="center"><b>Task List</b></td>
+      <td align="center"><b>Dark Mode</b></td>
+      <td align="center"><b>Expired Tasks</b></td>
+    </tr>
+    <tr>
+      <td><img src="public/medias/1.png" width="240" alt="Home" /></td>
+      <td><img src="public/medias/2.png" width="240" alt="Task List" /></td>
+      <td><img src="public/medias/3.png" width="240" alt="Dark Mode" /></td>
+      <td><img src="public/medias/4.png" width="240" alt="Expired Tasks" /></td>
+    </tr>
+  </table>
+</div>
+
+---
+
+## 📝 Usage
+
+- **Login via Google:** Click the `Login with Google` button.
+- **Add Task:** Click the floating `+` and enter your task.
+- **Mark as Done:** Click a task to complete it.
+- **Re-add Expired:** Click an expired task to move it back to active.
+- **Expiry:** Tasks expire after 24h, deleted after 48h.
+- **Theme:** Toggle light/dark mode with the switcher.
+
+---
+
+## 🧩 Architecture & Best Practices
+
+- **Atomic Components:** UI is broken into small, reusable pieces.
+- **Centralized Types:** All types in `src/types` for consistency.
+- **Repository Pattern:** Data access is abstracted for testability.
+- **Service Layer:** Business logic is separated from UI and data.
+- **Context & Hooks:** Global state and logic via context/providers and custom hooks.
+- **Barrel Exports:** Clean, maintainable imports.
+- **Error Handling:** Defensive code, user-friendly errors.
+- **Client/Server Boundaries:** "use client" only where needed.
+
+---
+
+## 🧪 Testing
+
+- Unit tests for services and hooks in `src/__tests__`.
+- Run tests with:
+  ```sh
+  npm test
+  ```
+
+---
+
+## 📄 License
+
+MIT. See [LICENSE](LICENSE).
+
+---
+
+**Enjoy a focused, productive day with Today Notes!**
