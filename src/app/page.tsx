@@ -1,14 +1,14 @@
 "use client";
 
 import React, { lazy, Suspense, useEffect, useState, useRef } from "react";
-import { addTask, getTasks, doneTask, reAddTask } from "@/services/taskService";
+import { addTask, getTasks, doneTask, reAddTask } from "@/services/taskAPIService";
 import { Task, TaskStatus } from "@/app/components/task";
 import { toast } from "react-hot-toast";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Landing from "@/app/components/Landing";
 
 const FooterText = lazy(() => import("@/app/components/FooterText"));
-const ThemeSwitcher = lazy(() => import("@/app/components/themeSwticher"));
+const ThemeSwitcher = lazy(() => import("@/app/components/themeSwitcher"));
 const Toaster = lazy(() =>
   import("react-hot-toast").then((mod) => ({ default: mod.Toaster }))
 );

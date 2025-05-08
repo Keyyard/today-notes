@@ -1,3 +1,7 @@
+//** 
+// This is a API Service for CLIENT SIDE - FRONT END API calls.
+// This will trigger the signals to the server and get the data back.
+// **
 import { Task } from "@/app/components/task";
 import { getSession } from "next-auth/react";
 

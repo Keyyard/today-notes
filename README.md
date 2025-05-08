@@ -105,15 +105,19 @@ Today Notes is a modern, minimalist daily task manager built with **Next.js 14 A
 
 ---
 
-## 🧪 Testing
+## Architecture Flow
 
-- Unit tests for services and hooks in `src/__tests__`.
-- Run tests with:
-  ```sh
-  npm test
-  ```
-
----
+```
+1. User interacts with UI (e.g., adds a task).
+                  v
+2. Service layer (frontend) sends request to API (e.g., TaskAPIService).
+                  v
+3. API Route/Handler receives the request and calls the repository.
+                  v
+4. Repository layer interacts with the database (e.g., TaskRepository).
+                  v
+5. Database layer (e.g., PostgreSQL) stores the data.
+```
 
 ## 📄 License
 

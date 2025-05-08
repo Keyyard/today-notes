@@ -1,3 +1,9 @@
+//** 
+// This is a Database Repository layer
+// This interacts with the database directly for the server-side code - BACKEND
+// RECEIVE SIGNALS FROM THE FRONTEND AND SENDS BACK DATA
+// **
+
 import { TaskStatus } from '@/app/components/task';
 import prisma from '@/lib/prisma';
 import type Task from '@/types/task';
