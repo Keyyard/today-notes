@@ -2,55 +2,22 @@ import prisma from '@/lib/prisma';
 import { getToken } from 'next-auth/jwt';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { TaskStatus } from '@/app/components/task';
-
-interface Task {
-  id: number;
-  task: string;
-  status: TaskStatus;
-  date: Date;
-}
-
-interface ErrorResponse {
-  error: string;
-}
-
-interface SuccessResponse {
-  message: string;
-  task?: Task;
-}
+import type Task from '@/types/task';
+import TaskRepository from '@/app/repositories/taskRepository';
+import type { ErrorResponse, SuccessResponse } from '@/types/responses';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ErrorResponse | SuccessResponse>
 ) {
-  // get token from Authorization header
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  // console.log('token:', token);
-  if (!token || !token.email) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
 
-  const user = await prisma.user.findUnique({
-    where: { email: token.email },
-  });
-
-  if (!user) {
-    return res.status(401).json({ error: 'Unauthorized | User not found' });
-  }
-
+  const TaskRepo = new TaskRepository();
   const { id } = req.query;
 
   switch (req.method) {
     case 'PUT':
       try {
-        const updatedTask = await prisma.task.update({
-          where: {
-            id: Number(id),
-            userId: user.id,
-          },
-          data: { status: TaskStatus.Done, date: new Date()
-           },
-        });
+        const updatedTask = await TaskRepo.putTask(req, Number(id));
         return res.status(200).json({ message: 'Task marked as done', task: updatedTask });
       } catch (error) {
         console.error('Error marking task as done:', error);
@@ -59,13 +26,7 @@ export default async function handler(
 
     case 'PATCH':
       try {
-        const updatedTask = await prisma.task.update({
-          where: {
-            id: Number(id),
-            userId: user.id,
-          },
-          data: { status: TaskStatus.Active, date: new Date() },
-        });
+        const updatedTask = await TaskRepo.patchTask(req, Number(id));
         return res.status(200).json({ message: 'Task re-added successfully', task: updatedTask });
       } catch (error) {
         console.error('Error re-adding task:', error);
