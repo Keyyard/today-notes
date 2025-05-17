@@ -3,8 +3,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 import { getTasks as apiGetTasks, addTask as apiAddTask, doneTask as apiDoneTask, reAddTask as apiReAddTask } from "@/services/taskAPIService";
 
-import type { Task, TaskStatus } from "@/types/task";
-
 interface TaskContextType {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;

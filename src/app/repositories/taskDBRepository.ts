@@ -4,12 +4,10 @@
 // RECEIVE SIGNALS FROM THE FRONTEND AND SENDS BACK DATA
 // **
 
-// TaskStatus is now global, no import needed
 import { getToken } from 'next-auth/jwt';
 
 import prisma from '@/lib/prisma';
 
-// Task is now global, no import needed
 import type { NextApiRequest } from 'next';
 
 export default class TaskRepository {
