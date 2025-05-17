@@ -3,13 +3,15 @@
 // This will handle the requests from Services
 //  and send the data to the Repository to interact with the database
 //  */
-import prisma from '@/lib/prisma';
+
 import { getToken } from 'next-auth/jwt';
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { TaskStatus } from '@/app/components/task';
-import type Task from '@/types/task';
+
+
 import TaskRepository from '@/app/repositories/taskDBRepository';
+import prisma from '@/lib/prisma';
+
 import type { ErrorResponse, SuccessResponse } from '@/types/responses';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,

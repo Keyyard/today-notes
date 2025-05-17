@@ -1,11 +1,10 @@
 "use client";
 
-import React, { lazy, Suspense, useEffect, useState, useRef } from "react";
-import { addTask, getTasks, doneTask, reAddTask } from "@/services/taskAPIService";
-import { Task, TaskStatus } from "@/app/components/task";
-import { toast } from "react-hot-toast";
 import { signIn, signOut, useSession } from "next-auth/react";
+import React, { lazy, Suspense, useRef, useState, useEffect } from "react";
+
 import Landing from "@/app/components/Landing";
+import { useTask } from "@/app/context/taskContext";
 
 const FooterText = lazy(() => import("@/app/components/FooterText"));
 const ThemeSwitcher = lazy(() => import("@/app/components/themeSwitcher"));
@@ -15,7 +14,7 @@ const Toaster = lazy(() =>
 
 export default function App() {
   const { data: session } = useSession();
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { tasks, addTask, doneTask, reAddTask } = useTask();
   const [time, setTime] = useState<string>("");
   const [newTask, setNewTask] = useState<string>("");
   const [showInput, setShowInput] = useState<boolean>(false);
@@ -46,71 +45,23 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const cachedTasks = localStorage.getItem("tasks");
-    if (cachedTasks) {
-      setTasks(JSON.parse(cachedTasks));
+    if (showInput && inputRef.current) {
+      inputRef.current.focus();
     }
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
-    try {
-      const data = await getTasks();
-      setTasks(data.tasks);
-      localStorage.setItem("tasks", JSON.stringify(data.tasks)); // Cache tasks
-    } catch {
-      console.log("Error fetching tasks");
-    }
-  };
+  }, [showInput]);
 
   const handleAddTask = async () => {
     if (newTask.trim() === "") return;
-    const newTaskData = {
-      id: Date.now(),
-      task: newTask,
-      status: TaskStatus.Active,
-      date: new Date(),
-    };
-    setTasks((prev) => [newTaskData, ...prev]); // Update UI immediately
-    const newTaskBackend = newTask;
+    await addTask(newTask);
     setNewTask("");
-    try {
-      await addTask(newTaskBackend);
-    } catch (error) {
-      setTasks((prev) => prev.filter((task) => task.id !== newTaskData.id)); // rollback UI changes
-      toast.error("Error adding task");
-      console.log("Error adding task");
-    }
   };
 
   const handleDoneTask = async (id: number) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, status: TaskStatus.Done } : task
-      )
-    );
-    try {
-      await doneTask(id);
-    } catch (error) {
-      toast.error("Error marking task as done");
-    }
+    await doneTask(id);
   };
 
   const handleReAddTask = async (task: Task) => {
-    const updatedTask = {
-      ...task,
-      date: new Date(),
-      status: TaskStatus.Active,
-    };
-    setTasks((prev) => prev.map((t) => (t.id === task.id ? updatedTask : t))); // Update UI immediately
-    try {
-      await reAddTask(task);
-    } catch (error) {
-      setTasks((prev) => prev.map((t) => (t.id === task.id ? task : t))); // Rollback UI changes
-      toast.error("Error re-adding task");
-      console.error("Error re-adding task", error);
-    }
+    await reAddTask(task);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,12 +83,6 @@ export default function App() {
       inputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
-
-  useEffect(() => {
-    if (showInput && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [showInput]);
 
   const toggleInput = () => {
     setShowInput(!showInput);

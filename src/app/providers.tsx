@@ -3,10 +3,14 @@
 import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
 
+import { TaskProvider } from "@/app/context/taskContext";
+
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <SessionProvider>
-      {children}
+      <TaskProvider>
+        {children}
+      </TaskProvider>
     </SessionProvider>
   );
 }
